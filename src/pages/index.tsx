@@ -8,13 +8,28 @@ import { TopBar } from "@/components/TopBar";
 import { HomeHeroCategories } from "@/components/HomeHeroCategories";
 import { Categories } from "@/models/Categories";
 
-import { Box, Container, Heading, SimpleGrid } from "@chakra-ui/react";
+import { 
+  Box,
+  Button,
+  Container, 
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Grid,
+  Heading,
+  Input, 
+  SimpleGrid, 
+  Text,
+ } from "@chakra-ui/react";
+
 import { AdvantageSection } from "@/components/AdvantageSection";
 import { GroupedProducts, groupProductsByCategory } from '@/utils/groupProductsByCategory';
 import { HomeProductsGrid } from '@/components/HomeProductsGrid';
 
 import bannerNewSeason from '/public/banner-new-season.jpg';
 import bannerSale from '/public/banner-sale.jpg';
+import { CenteredLabel } from "@/components/CenteredLabel";
+import { PromoBanner } from '@/components/PromoBanner';
 
 export type Product = {
   id: number;
@@ -44,27 +59,27 @@ export default function Home( { products, categories, productsGroupedByCategory 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <TopBar />
       <Box marginBottom="2rem">
         <Header />
       </Box>
-
       <main>
-        <Container size={{
+        <Container 
+          size={{
              lg: 'lg'
-          }}>
+          }}
+        >
           <HomeHeroCategories categories={categories}></HomeHeroCategories>
           <AdvantageSection />
-          </Container>
+        </Container>
 
-          <Container
+        <Container
             maxW={{
               base: '100%',
               md: '1110px',
             }}
             paddingX="0"
-          >
+        >
             {Object.entries(productsGroupedByCategory).map(([category, products]) => {
               return (
                 <Box key={category} marginBottom="4rem">
@@ -83,29 +98,86 @@ export default function Home( { products, categories, productsGroupedByCategory 
                 </Box>
               );
             })}
-          </Container>
+        </Container>
 
-          <Container
-            size={{
-              lg: 'lg',
-            }}
-          >
-            <SimpleGrid
-              minChildWidth="255px"
+        <Container
+          size={{
+           lg: 'lg',
+          }}
+        >
+          <SimpleGrid
+              minChildWidth="320px"
               spacing={{
                 base: '1rem',
                 md: '2rem',
               }}
-            >
-              <Image src={bannerNewSeason} alt="" />
-              <Image src={bannerSale} alt="" />
-            </SimpleGrid>
-          </Container>
+            > 
+              <PromoBanner image={bannerNewSeason}>
+                <Text fontSize="sm" color="gray.500">
+                  New Season
+                </Text>
+                <Text fontSize="lg" fontWeight="bold" whiteSpace="nowrap">
+                  lookbook collection
+                </Text>
+              </PromoBanner>
+              <PromoBanner image={bannerSale}>
+                <Text fontSize="sm" color="gray.500">
+                  Sale
+                </Text>
+                <Text fontSize="lg" fontWeight="bold" whiteSpace="nowrap">
+                  Get UP to{' '}
+                  <Text as="span" color="red">
+                    50% off
+                  </Text>
+                </Text>
+             </PromoBanner>
+            </SimpleGrid>  
+        </Container>
+
+        <Container 
+          background={'linear-gradient(180deg, #F3F2F2 0%, #DCDBDB 100%);'}
+          m="2rem auto"
+          p="1.5rem"
+          maxW="100%"
+        >
+          <Box maxW="33rem" m="auto" as="article" bgColor="white" p="2rem">
+            <Grid gap="2rem" maxW="22rem" m="auto" textAlign="center">
+              <header>
+                <Heading size="sm" textTransform="uppercase" color="gray">
+                   Special Offer
+                </Heading>
+                <Heading size="xl" textTransform="uppercase">
+                   Subscribe and{' '}
+                  <Text as="span" color="red">
+                   Get 10% Off
+                  </Text>
+                </Heading>
+              </header>
+              <Grid as="form" action="" gap="1.5rem">
+                <FormControl>
+                  <Input
+                    height="4rem"
+                    textAlign="inherit"
+                    borderRadius="0"
+                    type="email"
+                    placeholder="Enter your email"
+                    backgroundColor="gray.100"
+                  />
+                </FormControl>
+                <Button bgColor="black" w="100% h=4rem size={'lg'}>
+                  Subscribe
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </Container>
       </main>
-      x
     </>
-  )
+  );
 }
+
+
+
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const products = await fetch("https://fakestoreapi.com/products").then(res => res.json());
