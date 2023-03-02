@@ -1,6 +1,5 @@
 import { GetServerSidePropsContext } from "next";
-import Head from 'next/head'
-import Image from "next/image"
+import Head from "next/head";
 
 import { Header } from "@/components/Header";
 import { TopBar } from "@/components/TopBar";
@@ -8,28 +7,30 @@ import { TopBar } from "@/components/TopBar";
 import { HomeHeroCategories } from "@/components/HomeHeroCategories";
 import { Categories } from "@/models/Categories";
 
-import { 
+import {
   Box,
   Button,
-  Container, 
+  Container,
   FormControl,
   FormHelperText,
   FormLabel,
   Grid,
   Heading,
-  Input, 
-  SimpleGrid, 
+  Input,
+  SimpleGrid,
   Text,
- } from "@chakra-ui/react";
-
+} from "@chakra-ui/react";
 import { AdvantageSection } from "@/components/AdvantageSection";
-import { GroupedProducts, groupProductsByCategory } from '@/utils/groupProductsByCategory';
-import { HomeProductsGrid } from '@/components/HomeProductsGrid';
+import {
+  GroupedProducts,
+  groupProductsByCategory,
+} from "@/utils/groupProductsByCategory";
+import { HomeProductsGrid } from "@/components/HomeProductsGrid";
 
-import bannerNewSeason from '/public/banner-new-season.jpg';
-import bannerSale from '/public/banner-sale.jpg';
+import bannerNewSeason from "/public/banner-new-season.jpg";
+import bannerSale from "/public/banner-sale.jpg";
 import { CenteredLabel } from "@/components/CenteredLabel";
-import { PromoBanner } from '@/components/PromoBanner';
+import { PromoBanner } from "@/components/PromoBanner";
 
 export type Product = {
   id: number;
@@ -42,7 +43,7 @@ export type Product = {
     count: number;
     rate: number;
   };
-}
+};
 
 type Props = {
   products: Product[];
@@ -50,7 +51,11 @@ type Props = {
   productsGroupedByCategory: GroupedProducts;
 };
 
-export default function Home( { products, categories, productsGroupedByCategory }: Props) {
+export default function Home({
+  products,
+  categories,
+  productsGroupedByCategory,
+}: Props) {
   return (
     <>
       <Head>
@@ -64,23 +69,20 @@ export default function Home( { products, categories, productsGroupedByCategory 
         <Header />
       </Box>
       <main>
-        <Container 
-          size={{
-             lg: 'lg'
-          }}
-        >
+        <Container>
           <HomeHeroCategories categories={categories}></HomeHeroCategories>
           <AdvantageSection />
         </Container>
 
         <Container
-            maxW={{
-              base: '100%',
-              md: '1110px',
-            }}
-            paddingX="0"
+          maxW={{
+            base: "100%",
+            md: "1110px",
+          }}
+          paddingX="0"
         >
-            {Object.entries(productsGroupedByCategory).map(([category, products]) => {
+          {Object.entries(productsGroupedByCategory).map(
+            ([category, products]) => {
               return (
                 <Box key={category} marginBottom="4rem">
                   <Heading
@@ -88,8 +90,8 @@ export default function Home( { products, categories, productsGroupedByCategory 
                     size="md"
                     textTransform="uppercase"
                     margin={{
-                      base: '0 0 1rem 1rem',
-                      md: '0 0 1.5rem',
+                      base: "0 0 1rem 1rem",
+                      md: "0 0 1.5rem",
                     }}
                   >
                     {category}
@@ -97,45 +99,42 @@ export default function Home( { products, categories, productsGroupedByCategory 
                   <HomeProductsGrid products={products} />
                 </Box>
               );
-            })}
+            }
+          )}
+        </Container>
+
+        <Container>
+          <SimpleGrid
+            minChildWidth="320px"
+            spacing={{
+              base: "1rem",
+              md: "2rem",
+            }}
+          >
+            <PromoBanner image={bannerNewSeason}>
+              <Text fontSize="sm" color="gray.500">
+                New Season
+              </Text>
+              <Text fontSize="lg" fontWeight="bold" whiteSpace="nowrap">
+                lookbook collection
+              </Text>
+            </PromoBanner>
+            <PromoBanner image={bannerSale}>
+              <Text fontSize="sm" color="gray.500">
+                Sale
+              </Text>
+              <Text fontSize="lg" fontWeight="bold" whiteSpace="nowrap">
+                Get UP to{" "}
+                <Text as="span" color="red">
+                  50% off
+                </Text>
+              </Text>
+            </PromoBanner>
+          </SimpleGrid>
         </Container>
 
         <Container
-          size={{
-           lg: 'lg',
-          }}
-        >
-          <SimpleGrid
-              minChildWidth="320px"
-              spacing={{
-                base: '1rem',
-                md: '2rem',
-              }}
-            > 
-              <PromoBanner image={bannerNewSeason}>
-                <Text fontSize="sm" color="gray.500">
-                  New Season
-                </Text>
-                <Text fontSize="lg" fontWeight="bold" whiteSpace="nowrap">
-                  lookbook collection
-                </Text>
-              </PromoBanner>
-              <PromoBanner image={bannerSale}>
-                <Text fontSize="sm" color="gray.500">
-                  Sale
-                </Text>
-                <Text fontSize="lg" fontWeight="bold" whiteSpace="nowrap">
-                  Get UP to{' '}
-                  <Text as="span" color="red">
-                    50% off
-                  </Text>
-                </Text>
-             </PromoBanner>
-            </SimpleGrid>  
-        </Container>
-
-        <Container 
-          background={'linear-gradient(180deg, #F3F2F2 0%, #DCDBDB 100%);'}
+          background={"linear-gradient(180deg, #F3F2F2 0%, #DCDBDB 100%);"}
           m="2rem auto"
           p="1.5rem"
           maxW="100%"
@@ -144,12 +143,12 @@ export default function Home( { products, categories, productsGroupedByCategory 
             <Grid gap="2rem" maxW="22rem" m="auto" textAlign="center">
               <header>
                 <Heading size="sm" textTransform="uppercase" color="gray">
-                   Special Offer
+                  Special Offer
                 </Heading>
                 <Heading size="xl" textTransform="uppercase">
-                   Subscribe and{' '}
+                  Subscribe And{" "}
                   <Text as="span" color="red">
-                   Get 10% Off
+                    Get 10% Off
                   </Text>
                 </Heading>
               </header>
@@ -164,7 +163,7 @@ export default function Home( { products, categories, productsGroupedByCategory 
                     backgroundColor="gray.100"
                   />
                 </FormControl>
-                <Button bgColor="black" w="100% h=4rem size={'lg'}>
+                <Button bgColor="black" w="100%" h="4rem" size={"lg"}>
                   Subscribe
                 </Button>
               </Grid>
@@ -176,12 +175,13 @@ export default function Home( { products, categories, productsGroupedByCategory 
   );
 }
 
-
-
-
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const products = await fetch("https://fakestoreapi.com/products").then(res => res.json());
-  const categories = await fetch("https://fakestoreapi.com/products/categories").then(res => res.json());
+  const products = await fetch("https://fakestoreapi.com/products").then(
+    (res) => res.json()
+  );
+  const categories = await fetch(
+    "https://fakestoreapi.com/products/categories"
+  ).then((res) => res.json());
 
   const productsGroupedByCategory = groupProductsByCategory(products);
 
