@@ -1,5 +1,6 @@
 import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
+import Image from "next/image";
 
 import { Header } from "@/components/Header";
 import { TopBar } from "@/components/TopBar";
@@ -11,9 +12,8 @@ import {
   Box,
   Button,
   Container,
+  Flex,
   FormControl,
-  FormHelperText,
-  FormLabel,
   Grid,
   Heading,
   Input,
@@ -27,10 +27,12 @@ import {
 } from "@/utils/groupProductsByCategory";
 import { HomeProductsGrid } from "@/components/HomeProductsGrid";
 
+import { PromoBanner } from "@/components/PromoBanner";
+
 import bannerNewSeason from "/public/banner-new-season.jpg";
 import bannerSale from "/public/banner-sale.jpg";
-import { CenteredLabel } from "@/components/CenteredLabel";
-import { PromoBanner } from "@/components/PromoBanner";
+import menWalking from "/public/men-walking.png";
+import womenStanding from "/public/woman-standing.png";
 
 export type Product = {
   id: number;
@@ -135,12 +137,89 @@ export default function Home({
 
         <Container
           background={"linear-gradient(180deg, #F3F2F2 0%, #DCDBDB 100%);"}
-          m="2rem auto"
-          p="1.5rem"
+          m={{
+            base: "14.75rem 0 0",
+            md: "2rem auto",
+          }}
+          p={{
+            base: "1.5rem",
+            md: "3.5556rem",
+          }}
           maxW="100%"
+          position="relative"
         >
-          <Box maxW="33rem" m="auto" as="article" bgColor="white" p="2rem">
-            <Grid gap="2rem" maxW="22rem" m="auto" textAlign="center">
+          <Box
+            position="absolute"
+            top={{
+              base: "calc(-236px + 1.5rem)",
+              md: "initial",
+            }}
+            right={{
+              base: "32px",
+              md: "50%",
+            }}
+            transform={{
+              md: "translateX(470px)",
+            }}
+            height={{
+              base: "236px",
+              md: "524px",
+            }}
+            width={{
+              base: "99px",
+              md: "219px",
+            }}
+          >
+            <Image
+              src={menWalking}
+              style={{ objectFit: "cover" }}
+              fill={true}
+              alt=""
+            />
+          </Box>
+          <Box
+            position="absolute"
+            top={{
+              base: "calc(-242px + 1.5rem)",
+              md: "initial",
+            }}
+            bottom={{
+              md: "0",
+            }}
+            left={{
+              base: "1.5rem",
+              md: "50%",
+            }}
+            transform={{
+              md: "translateX(-530px)",
+            }}
+            height={{
+              base: "242px",
+              md: "545px",
+            }}
+            width={{
+              base: "128px",
+              md: "311px",
+            }}
+          >
+            <Image
+              src={womenStanding}
+              style={{ objectFit: "cover" }}
+              fill={true}
+              alt=""
+            />
+          </Box>
+          <Flex
+            height={{
+              md: "28.75rem",
+            }}
+            maxW="33.25rem"
+            m="auto"
+            as="article"
+            bgColor="white"
+            p="2rem"
+          >
+            <Grid gap="2rem" maxW="21.25rem" m="auto" textAlign="center">
               <header>
                 <Heading size="sm" textTransform="uppercase" color="gray">
                   Special Offer
@@ -163,12 +242,10 @@ export default function Home({
                     backgroundColor="gray.100"
                   />
                 </FormControl>
-                <Button bgColor="black" w="100%" h="4rem" size={"lg"}>
-                  Subscribe
-                </Button>
+                <Button size={"xl"}>Subscribe</Button>
               </Grid>
             </Grid>
-          </Box>
+          </Flex>
         </Container>
       </main>
     </>
