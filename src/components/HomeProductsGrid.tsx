@@ -1,6 +1,8 @@
-import { Product } from '@/pages';
-import { Box, Grid } from '@chakra-ui/react';
-import { ProductCard } from './ProductCard';
+import { Product } from "@/pages";
+import { slugify } from "@/utils/sluglify";
+import { Box, Grid } from "@chakra-ui/react";
+import Link from "next/link";
+import { ProductCard } from "./ProductCard";
 
 type Props = {
   products: Product[];
@@ -10,12 +12,12 @@ export function HomeProductsGrid(props: Props) {
   return (
     <Grid
       gridTemplateColumns={{
-        base: 'repeat(auto-fit, 255px)',
-        md: 'repeat(auto-fit, minmax(255px, 1fr))',
+        base: "repeat(auto-fit, 255px)",
+        md: "repeat(auto-fit, minmax(255px, 1fr))",
       }}
       gridAutoFlow={{
-        base: 'column',
-        md: 'row',
+        base: "column",
+        md: "row",
       }}
       alignItems="stretch"
       gridAutoColumns="255px"
@@ -23,22 +25,26 @@ export function HomeProductsGrid(props: Props) {
       overflowX="scroll"
       scrollSnapType="x mandatory"
       scrollSnapStop="always"
-      gap={'1.85rem'}
+      gap={"1.85rem"}
     >
       {props.products.map((product, i) => {
+        const slug = slugify(product.title);
+
         return (
           <Box
             marginLeft={{
-              base: i === 0 ? '1rem' : '0',
-              md: '0',
+              base: i === 0 ? "1rem" : "0",
+              md: "0",
             }}
             key={product.id}
             scrollSnapAlign="center"
             border="solid 1px"
-            borderColor={'gray.200'}
-            padding={'1rem'}
+            borderColor={"gray.200"}
+            padding={"1rem"}
           >
-            <ProductCard {...product} />
+            <Link href={`/products/${slug}-${product.id}`}>
+              <ProductCard {...product} />
+            </Link>
           </Box>
         );
       })}
