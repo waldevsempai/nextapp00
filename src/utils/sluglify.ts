@@ -1,3 +1,5 @@
+import { StarIcon } from "@chakra-ui/icons"
+
 export const slugify = (...args: (string | number)[]): string => {
     const value = args.join(' ')
   
@@ -9,4 +11,3 @@ export const slugify = (...args: (string | number)[]): string => {
         .replace(/[^a-z0-9 ]/g, '') // remove all chars not letters, numbers and spaces (to be replaced)
         .replace(/\s+/g, '-') // separator
   }
-  
