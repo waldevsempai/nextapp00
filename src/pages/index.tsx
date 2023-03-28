@@ -1,42 +1,24 @@
-import { GetServerSidePropsContext } from "next";
-import Head from "next/head";
-import Image from "next/image";
+import { GetServerSidePropsContext } from 'next';
+import Head from 'next/head';
 
-import { Header } from "@/components/Header";
-import { TopBar } from "@/components/TopBar";
+import { HomeHeroCategories } from '@/components/HomeHeroCategories';
+import { Categories } from '@/models/Categories';
 
-import { HomeHeroCategories } from "@/components/HomeHeroCategories";
-import { Categories } from "@/models/Categories";
+import { Box, Container, Heading, SimpleGrid, Text } from '@chakra-ui/react';
+import { AdvantageSection } from '@/components/AdvantageSection';
+import { GroupedProducts, groupProductsByCategory } from '@/utils/groupProductsByCategory';
+import { ProductsGrid } from '@/components/ProductsGrid';
 
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  FormControl,
-  Grid,
-  Heading,
-  Input,
-  SimpleGrid,
-  Text,
-} from "@chakra-ui/react";
-import { AdvantageSection } from "@/components/AdvantageSection";
-import {
-  GroupedProducts,
-  groupProductsByCategory,
-} from "@/utils/groupProductsByCategory";
-import { HomeProductsGrid } from "@/components/HomeProductsGrid";
+import { PromoBanner } from '@/components/PromoBanner';
 
-import { PromoBanner } from "@/components/PromoBanner";
+import bannerNewSeason from '/public/banner-new-season.jpg';
+import bannerSale from '/public/banner-sale.jpg';
+import blogPic1 from '/public/blog-pic-01.jpg';
+import blogPic2 from '/public/blog-pic-02.jpg';
+import blogPic3 from '/public/blog-pic-03.jpg';
 
-import bannerNewSeason from "/public/banner-new-season.jpg";
-import bannerSale from "/public/banner-sale.jpg";
-import blogPic1 from "/public/blog-pic-01.jpg";
-import blogPic2 from "/public/blog-pic-02.jpg";
-import blogPic3 from "/public/blog-pic-03.jpg";
-
-import { SubscribeSection } from "@/components/SubscribeSection";
-import { BlogPostCard } from "@/components/BlogPostCard";
+import { SubscribeSection } from '@/components/SubscribeSection';
+import { BlogPostCard } from '@/components/BlogPostCard';
 
 export type Product = {
   id: number;
@@ -66,7 +48,7 @@ export default function Home({ categories, productsGroupedByCategory }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <Box as="main" mt="2rem">
         <Container>
           <HomeHeroCategories categories={categories}></HomeHeroCategories>
           <AdvantageSection />
@@ -74,39 +56,37 @@ export default function Home({ categories, productsGroupedByCategory }: Props) {
 
         <Container
           maxW={{
-            base: "100%",
-            md: "1110px",
+            base: '100%',
+            md: '1110px',
           }}
           paddingX="0"
         >
-          {Object.entries(productsGroupedByCategory).map(
-            ([category, products]) => {
-              return (
-                <Box key={category} marginBottom="4rem">
-                  <Heading
-                    as="h2"
-                    size="md"
-                    textTransform="uppercase"
-                    margin={{
-                      base: "0 0 1rem 1rem",
-                      md: "0 0 1.5rem",
-                    }}
-                  >
-                    {category}
-                  </Heading>
-                  <HomeProductsGrid products={products} />
-                </Box>
-              );
-            }
-          )}
+          {Object.entries(productsGroupedByCategory).map(([category, products]) => {
+            return (
+              <Box key={category} marginBottom="4rem">
+                <Heading
+                  as="h2"
+                  size="md"
+                  textTransform="uppercase"
+                  margin={{
+                    base: '0 0 1rem 1rem',
+                    md: '0 0 1.5rem',
+                  }}
+                >
+                  {category}
+                </Heading>
+                <ProductsGrid products={products} />
+              </Box>
+            );
+          })}
         </Container>
 
         <Container>
           <SimpleGrid
             minChildWidth="320px"
             spacing={{
-              base: "1rem",
-              md: "2rem",
+              base: '1rem',
+              md: '2rem',
             }}
           >
             <PromoBanner image={bannerNewSeason}>
@@ -122,7 +102,7 @@ export default function Home({ categories, productsGroupedByCategory }: Props) {
                 Sale
               </Text>
               <Text fontSize="lg" fontWeight="bold" whiteSpace="nowrap">
-                Get UP to{" "}
+                Get UP to{' '}
                 <Text as="span" color="red">
                   50% off
                 </Text>
@@ -135,29 +115,21 @@ export default function Home({ categories, productsGroupedByCategory }: Props) {
           p="0"
           maxW="100%"
           m={{
-            base: "14.75rem 0 4rem",
-            md: "2rem auto 6rem",
+            base: '14.75rem 0 4rem',
+            md: '2rem auto 6rem',
           }}
         >
           <SubscribeSection />
         </Container>
 
         <Container>
-          <Heading
-            as="h2"
-            fontSize="2xl"
-            textTransform="uppercase"
-            mb={{ base: "2rem", md: "3rem" }}
-          >
+          <Heading as="h2" fontSize="2xl" textTransform="uppercase" mb={{ base: '2rem', md: '3rem' }}>
             Latest From Blogpost
           </Heading>
-          <SimpleGrid
-            minChildWidth="300px"
-            spacing={{
-              base: "2.5rem",
-              md: "1.5rem",
-            }}
-          >
+          <SimpleGrid minChildWidth="300px" spacing={{
+            base: '2.5rem',
+            md: '1.5rem',
+          }}>
             <BlogPostCard
               image={blogPic1}
               title="The Easiest Way to Break"
@@ -177,18 +149,14 @@ export default function Home({ categories, productsGroupedByCategory }: Props) {
             />
           </SimpleGrid>
         </Container>
-      </main>
+      </Box>
     </>
   );
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const products = await fetch("https://fakestoreapi.com/products").then(
-    (res) => res.json()
-  );
-  const categories = await fetch(
-    "https://fakestoreapi.com/products/categories"
-  ).then((res) => res.json());
+  const products = await fetch('https://fakestoreapi.com/products').then((res) => res.json());
+  const categories = await fetch('https://fakestoreapi.com/products/categories').then((res) => res.json());
 
   const productsGroupedByCategory = groupProductsByCategory(products);
 

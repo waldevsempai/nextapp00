@@ -1,11 +1,7 @@
-import { Button, Container } from "@chakra-ui/react";
-import Head from "next/head";
+import { Button, Container } from '@chakra-ui/react';
+import Head from 'next/head';
 
-export default function Kitchen({
-  products,
-  categories,
-  productsGroupedByCategory,
-}: Props) {
+export default function Kitchen() {
   return (
     <>
       <Head>
@@ -16,20 +12,20 @@ export default function Kitchen({
       </Head>
 
       <Container>
-        <Button size={"sm"}>Button</Button>
+        <Button size={'sm'}>Button</Button>
         <Button>Button</Button>
         <Button size="lg">Button</Button>
         <Button size="xl">Button</Button>
       </Container>
       <Container>
-        <Button variant={"outline"} size={"sm"}>
+        <Button variant={'outline'} size={'sm'}>
           Button
         </Button>
-        <Button variant={"outline"}>Button</Button>
-        <Button variant={"outline"} size="lg">
+        <Button variant={'outline'}>Button</Button>
+        <Button variant={'outline'} size="lg">
           Button
         </Button>
-        <Button variant={"outline"} size="xl">
+        <Button variant={'outline'} size="xl">
           Button
         </Button>
       </Container>
