@@ -1,46 +1,37 @@
-import Link from "next/link";
-import Image from "next/image";
-import {
-  Container,
-  Flex,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Show,
-} from "@chakra-ui/react";
-import { Box } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import Link from 'next/link';
+import Image from 'next/image';
+import { Container, Flex, IconButton, Menu, MenuButton, MenuItem, MenuList, Show } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 const menu = [
   {
-    title: "About Us",
-    href: "#",
+    title: 'About Us',
+    href: '#',
   },
   {
-    title: "Woman",
-    href: "#",
+    title: 'Woman',
+    href: '#',
   },
   {
-    title: "Men",
-    href: "#",
+    title: 'Men',
+    href: '#',
   },
   {
-    title: "Beauty",
-    href: "#",
+    title: 'Beauty',
+    href: '#',
   },
   {
-    title: "Accesories",
-    href: "#",
+    title: 'Accesories',
+    href: '#',
   },
   {
-    title: "Blog",
-    href: "#",
+    title: 'Blog',
+    href: '#',
   },
   {
-    title: "Contact",
-    href: "#",
+    title: 'Contact',
+    href: '#',
   },
 ];
 
@@ -48,16 +39,11 @@ export function Header() {
   return (
     <Box w="100%" as="header" borderBottom="solid 2px" borderColor="gray.100">
       <Container as={Flex} justifyContent="space-between" alignItems="center">
-        <Flex gap={"0.5rem"} margin="1rem 0">
+        <Flex gap={'0.5rem'} margin="1rem 0">
           <Show below="lg">
             <Box as="nav">
               <Menu>
-                <MenuButton
-                  as={IconButton}
-                  aria-label="Options"
-                  icon={<HamburgerIcon />}
-                  variant="outline"
-                />
+                <MenuButton as={IconButton} aria-label="Options" icon={<HamburgerIcon />} variant="outline" />
                 <MenuList>
                   {menu.map((item, index) => {
                     return (
@@ -70,7 +56,7 @@ export function Header() {
               </Menu>
             </Box>
           </Show>
-          <Image src="/logo.svg" alt="" width={100} height={48} />
+          <Link href="/"><Image src="/logo.svg" alt="" width={100} height={48} /></Link>
         </Flex>
         <Show above="lg">
           <Box as="nav">
